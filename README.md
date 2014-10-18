@@ -5,7 +5,7 @@ Cmd + Alt + c to connect to kdb
 Bring up console window to see output from kdb
 
 Use Dan Nugent's python q api. 
-Only works with Sublime 2
+Only works with Sublime 2.
 Inspired by https://github.com/wch/SendText
 
 ## Installation
