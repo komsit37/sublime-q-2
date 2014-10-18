@@ -1,0 +1,4 @@
+[
+{ "keys": ["ctrl+enter"], "command": "send_q" },
+{ "keys": ["ctrl+alt+c"], "command": "connect_q" }
+]
