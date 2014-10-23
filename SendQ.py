@@ -1,33 +1,26 @@
 import sublime
 import sublime_plugin
 import string
-import qpy
+from qpython import qconnection
 
 class QSendCommand(sublime_plugin.TextCommand):
 
     @staticmethod
-    def escapeString(s):
-        s = s.replace('\\', '\\\\')
-        s = s.replace('"', '\\"')
-        s = s.replace('\n', '')  # for multiple line
-        s = s.encode('ascii')  # qpy needs ascii
-        return s
-
-    @staticmethod
-    def send(selection):
+    def send(s):
         host = settings.get('host')
         port = settings.get('port')
         user = settings.get('user')
 
-        # Split selection into lines
-        selection = QSendCommand.escapeString(selection)
-        print(selection)
-        q = qpy.conn(host=host, port=int(port))
-        print(q(selection))
+        # Split s into lines
+        s = s.encode('ascii')  # qpy needs ascii
+        print(s)
+        #q = qpy.conn(host=host, port=int(port))
+        q = qconnection.QConnection(host = host, port = int(port))
+        q.open()
+        print(q(s))
         q.close()
 
     def run(self, edit):
-        print('run')
         global settings
         settings = sublime.load_settings('SendQ.sublime-settings')
         host = settings.get('host')
@@ -35,20 +28,20 @@ class QSendCommand(sublime_plugin.TextCommand):
         user = settings.get('user')
         self.view.set_status('q', 'q: ' + Q.toStr(host, port, user))
 
-        # get selection
-        selection = ""
+        # get s
+        s = ""
         for region in self.view.sel():
             if region.empty():
-                selection += self.view.substr(self.view.line(region)) + "\n"
+                s += self.view.substr(self.view.line(region)) + "\n"
                 # self.advanceCursor(region)
             else:
-                selection += self.view.substr(region) + "\n"
+                s += self.view.substr(region) + "\n"
 
-        # only proceed if selection is not empty
-        if(selection == "" or selection == "\n"):
+        # only proceed if s is not empty
+        if(s == "" or s == "\n"):
             return
 
-        self.send(selection)
+        self.send(s)
 
     def advanceCursor(self, region):
         (row, col) = self.view.rowcol(region.begin())
