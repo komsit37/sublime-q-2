@@ -12,20 +12,20 @@
                 "children":
                 [
                     {
-                        "caption": "SendQ",
+                        "caption": "sublime-q",
                         "children":
                         [
                             {
                                 "command": "open_file", "args":
                                 {
-                                    "file": "${packages}/SendQ/SendQ.sublime-settings"
+                                    "file": "${packages}/sublime-q/sublime-q.sublime-settings"
                                 },
                                 "caption": "Settings – Default"
                             },
                             {
                                 "command": "open_file", "args":
                                 {
-                                    "file": "${packages}/User/SendQ.sublime-settings"
+                                    "file": "${packages}/User/sublime-q.sublime-settings"
                                 },
                                 "caption": "Settings – User"
                             },
@@ -33,7 +33,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/SendQ/Default (OSX).sublime-keymap",
+                                    "file": "${packages}/sublime-q/Default (OSX).sublime-keymap",
                                     "platform": "OSX"
                                 },
                                 "caption": "Key Bindings – Default"
@@ -41,7 +41,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/SendQ/Default (Linux).sublime-keymap",
+                                    "file": "${packages}/sublime-q/Default (Linux).sublime-keymap",
                                     "platform": "Linux"
                                 },
                                 "caption": "Key Bindings – Default"
@@ -49,7 +49,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/SendQ/Default (Windows).sublime-keymap",
+                                    "file": "${packages}/sublime-q/Default (Windows).sublime-keymap",
                                     "platform": "Windows"
                                 },
                                 "caption": "Key Bindings – Default"

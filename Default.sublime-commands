@@ -1,6 +1,6 @@
 [
     {
-        "caption": "Connect to q server",
-        "command": "connect_q"
+        "caption": "Q: Connect",
+        "command": "q_connect"
     }
 ]

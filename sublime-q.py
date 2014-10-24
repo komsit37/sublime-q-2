@@ -17,12 +17,13 @@ class QSendCommand(sublime_plugin.TextCommand):
         #q = qpy.conn(host=host, port=int(port))
         q = qconnection.QConnection(host = host, port = int(port))
         q.open()
-        print(q(s))
+        res = q('.Q.s ' + s)
+        print(res)
         q.close()
 
     def run(self, edit):
         global settings
-        settings = sublime.load_settings('SendQ.sublime-settings')
+        settings = sublime.load_settings('sublime-q.sublime-settings')
         host = settings.get('host')
         port = settings.get('port')
         user = settings.get('user')
@@ -32,10 +33,10 @@ class QSendCommand(sublime_plugin.TextCommand):
         s = ""
         for region in self.view.sel():
             if region.empty():
-                s += self.view.substr(self.view.line(region)) + "\n"
+                s += self.view.substr(self.view.line(region))
                 # self.advanceCursor(region)
             else:
-                s += self.view.substr(region) + "\n"
+                s += self.view.substr(region)
 
         # only proceed if s is not empty
         if(s == "" or s == "\n"):
@@ -62,7 +63,7 @@ class QConnectCommand(sublime_plugin.WindowCommand):
 
     def run(self):
         global settings
-        settings = sublime.load_settings('SendQ.sublime-settings')
+        settings = sublime.load_settings('sublime-q.sublime-settings')
         host = settings.get('host')
         port = settings.get('port')
         user = settings.get('user')
@@ -72,11 +73,11 @@ class QConnectCommand(sublime_plugin.WindowCommand):
 
     def q_server_input(self, conn):
         global settings
-        settings = sublime.load_settings('SendQ.sublime-settings')
+        settings = sublime.load_settings('sublime-q.sublime-settings')
         settings.set('host', Q.host(conn))
         settings.set('port', Q.port(conn))
         settings.set('user', Q.user(conn))
-        sublime.save_settings('SendQ.sublime-settings')
+        sublime.save_settings('sublime-q.sublime-settings')
         print('save')
 
 class Q():
