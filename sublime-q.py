@@ -11,17 +11,18 @@ class QSendCommand(sublime_plugin.TextCommand):
         host = settings.get('host')
         port = settings.get('port')
         user = settings.get('user')
+        pwd = settings.get('pwd')
 
         # Split s into lines
         s = s.encode('ascii')  # qpy needs ascii
         print s
         #q = qpy.conn(host=host, port=int(port))
-        q = qconnection.QConnection(host = host, port = int(port))
+        q = qconnection.QConnection(host = host, port = int(port), username = user, password = pwd)
         q.open()
         try:
             res = q('.Q.s ' + s)
         except QException, msg:
-            res = " `" + str(msg)
+            res = "error: `" + str(msg)
         finally:
             print "close"
             q.close()
@@ -35,7 +36,8 @@ class QSendCommand(sublime_plugin.TextCommand):
         host = settings.get('host')
         port = settings.get('port')
         user = settings.get('user')
-        self.view.set_status('q', 'q: ' + Q.toStr(host, port, user))
+        pwd = settings.get('pwd')
+        self.view.set_status('q', 'q: ' + Q.toStr(host, port, user, pwd))
 
         # get s
         s = ""
@@ -103,9 +105,10 @@ class QConnectCommand(sublime_plugin.WindowCommand):
         host = settings.get('host')
         port = settings.get('port')
         user = settings.get('user')
+        pwd = settings.get('pwd')
 
         self.window.show_input_panel(
-            'connect to', Q.toStr(host,port,user), self.q_server_input, None, None)
+            'connect to', Q.toStr(host,port,user,pwd), self.q_server_input, None, None)
 
     def q_server_input(self, conn):
         global settings
@@ -113,13 +116,14 @@ class QConnectCommand(sublime_plugin.WindowCommand):
         settings.set('host', Q.host(conn))
         settings.set('port', Q.port(conn))
         settings.set('user', Q.user(conn))
+        settings.set('pwd', Q.user(conn))
         sublime.save_settings('sublime-q.sublime-settings')
         print('save')
 
 class Q():
     @staticmethod
-    def toStr(host, port, usr):
-        s = host + ':' + port + ':' + usr
+    def toStr(host, port, usr, pwd):
+        s = host + ':' + port + ':' + usr + '+' + pwd
         return s
     @staticmethod
     def host(s):
@@ -130,3 +134,6 @@ class Q():
     @staticmethod
     def user(s):
         return s.split(':')[2]
+    @staticmethod
+    def pwd(s):
+        return s.split(':')[3]
