@@ -1,4 +1,5 @@
 [
-{ "keys": ["ctrl+enter"], "command": "send_q" },
-{ "keys": ["ctrl+alt+c"], "command": "connect_q" }
+{ "keys": ["ctrl+enter"], "command": "q_send" },
+{ "keys": ["ctrl+alt+c"], "command": "q_connect" },
+{ "keys": ["ctrl+alt+s"], "command": "q_switch" }
 ]

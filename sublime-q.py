@@ -14,15 +14,11 @@ class QSendCommand(sublime_plugin.TextCommand):
             return ".Q.s " + s
     
     def send(self, s):
-        host = settings.get('host')
-        port = settings.get('port')
-        user = settings.get('user')
-        pwd = settings.get('pwd')
-
+        Q.init()
         try:
-            q = qconnection.QConnection(host = host, port = int(port), username = user, password = pwd)
+            q = qconnection.QConnection(host = Q.host, port = Q.port, username = Q.user, password = Q.pwd)
             q.open()
-            self.view.set_status('q', 'OK: ' + Q.toStr(host, port, user, pwd))
+            self.view.set_status('q', 'OK: ' + Q.con)
 
             statement = QSendCommand.transfrom(s)
             print statement
@@ -31,7 +27,7 @@ class QSendCommand(sublime_plugin.TextCommand):
             print msg
             res = "error: `" + str(msg)
         except socket_error as serr:
-            self.view.set_status('q', 'FAIL: ' + Q.toStr(host, port, user, pwd))
+            self.view.set_status('q', 'FAIL: ' + Q.con)
             raise serr
         finally:
             print "close"
@@ -106,49 +102,75 @@ class QSendCommand(sublime_plugin.TextCommand):
 class QConnectCommand(sublime_plugin.WindowCommand):
 
     def run(self):
-        settings = sublime.load_settings('sublime-q.sublime-settings')
-        host = settings.get('host')
-        port = settings.get('port')
-        user = settings.get('user')
-        pwd = settings.get('pwd')
-
+        Q.init()
         self.window.show_input_panel(
-            'connect to', Q.toStr(host,port,user,pwd), self.q_server_input, None, None)
+            Q.last, Q.con, self.on_done, None, None)
 
-    def q_server_input(self, conn):
+    def on_done(self, conn):
+        Q.save(conn)
+        print('saved ' + Q.con)
+        Q.test()
+
+class QSwitchCommand(sublime_plugin.WindowCommand):
+
+    def run(self):
         settings = sublime.load_settings('sublime-q.sublime-settings')
-        settings.set('host', Q.host(conn))
-        settings.set('port', Q.port(conn))
-        settings.set('user', Q.user(conn))
-        settings.set('pwd', Q.user(conn))
+        connections = settings.get('connections')
+        self.window.show_quick_panel(connections, self.on_done)
+
+    def on_done(self, x):
+        settings = sublime.load_settings('sublime-q.sublime-settings')
+        connections = settings.get('connections')
+        settings.set('last', connections[x][0])
         sublime.save_settings('sublime-q.sublime-settings')
-        print('saved ' + conn)
-
-        try:
-            q = qconnection.QConnection(host = Q.host(conn), port = int(Q.port(conn)), username = Q.user(conn), password = Q.pwd(conn))
-            q.open()
-            sublime.active_window().active_view().set_status('q', 'OK: ' + conn)
-        except socket_error as serr:
-            print serr
-            sublime.active_window().active_view().set_status('q', 'FAIL: ' + conn)
-        finally:
-            q.close()
-
+        Q.init()
+        Q.test()
 
 class Q():
+    @staticmethod
+    def init():
+        settings = sublime.load_settings('sublime-q.sublime-settings')
+        connections = settings.get('connections')
+        Q.last = settings.get('last')
+        Q.con = connections[0][1]
+        for c in connections:
+            if c[0] == Q.last: Q.con = c[1]
+
+        s = Q.con.split(':')
+        Q.host = s[0]
+        Q.port = int(s[1])
+        Q.user = s[2]
+        Q.pwd  = s[3]
+
+    @staticmethod
+    def save(x):
+        settings = sublime.load_settings('sublime-q.sublime-settings')
+        Q.last = settings.get('last')
+        Q.con = x
+        connections = settings.get('connections')
+        i = 0
+        for c in connections:
+            if c[0] == Q.last: break
+            i += 1
+        connections[i][1] = x
+        print connections
+        settings.set('connections', connections)
+        sublime.save_settings('sublime-q.sublime-settings')
+
     @staticmethod
     def toStr(host, port, usr, pwd):
         s = host + ':' + port + ':' + usr + ':' + pwd
         return s
+
     @staticmethod
-    def host(s):
-        return s.split(':')[0]
-    @staticmethod
-    def port(s):
-        return s.split(':')[1]
-    @staticmethod
-    def user(s):
-        return s.split(':')[2]
-    @staticmethod
-    def pwd(s):
-        return s.split(':')[3]
+    def test():
+        try:
+            q = qconnection.QConnection(host = Q.host, port = Q.port, username = Q.user, password = Q.pwd)
+            q.open()
+            sublime.active_window().active_view().set_status('q', 'OK: ' + Q.con)
+        except socket_error as serr:
+            print serr
+            sublime.active_window().active_view().set_status('q', 'FAIL: ' + Q.con)
+        finally:
+            q.close()
+   

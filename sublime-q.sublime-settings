@@ -1,4 +1,9 @@
 {
+	"connections": [
+		["localhost", "localhost:5555::"],
+		["new", "localhost:6666::"]
+	],
+	"last": "localhost",
 	"host": "localhost",
 	"port": "5555",
 	"user": "",
