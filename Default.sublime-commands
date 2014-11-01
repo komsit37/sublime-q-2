@@ -1,6 +1,10 @@
 [
     {
-        "caption": "Q: Connect",
+        "caption": "Q: Edit Connection",
         "command": "q_connect"
+    },
+    {
+        "caption": "Q: Switch Connection",
+        "command": "q_switch"
     }
 ]

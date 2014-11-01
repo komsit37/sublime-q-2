@@ -119,10 +119,7 @@ class QSwitchCommand(sublime_plugin.WindowCommand):
         self.window.show_quick_panel(connections, self.on_done)
 
     def on_done(self, x):
-        settings = sublime.load_settings('sublime-q.sublime-settings')
-        connections = settings.get('connections')
-        settings.set('last', connections[x][0])
-        sublime.save_settings('sublime-q.sublime-settings')
+        Q.saveLast(x)
         Q.init()
         Q.test()
 
@@ -153,14 +150,15 @@ class Q():
             if c[0] == Q.last: break
             i += 1
         connections[i][1] = x
-        print connections
         settings.set('connections', connections)
         sublime.save_settings('sublime-q.sublime-settings')
 
     @staticmethod
-    def toStr(host, port, usr, pwd):
-        s = host + ':' + port + ':' + usr + ':' + pwd
-        return s
+    def saveLast(x):
+        settings = sublime.load_settings('sublime-q.sublime-settings')
+        connections = settings.get('connections')
+        settings.set('last', connections[x][0])
+        sublime.save_settings('sublime-q.sublime-settings')
 
     @staticmethod
     def test():
