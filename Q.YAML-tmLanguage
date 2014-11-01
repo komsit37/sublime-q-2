@@ -1,0 +1,66 @@
+fileTypes: [q]
+name: q
+patterns:
+- {begin: '/
+
+    ', comment: string, end: '\\
+
+    ', name: comment.block.source.q}
+- {comment: string, match: //\w+.*, name: comment.block.source.q}
+- {begin: '\\
+
+    ', comment: string, end: '\\
+
+    ', name: comment.block.source.q}
+- {comment: string, match: / .*, name: comment.line.source.q}
+- captures:
+    '2': {name: keyword.other.complex.source.q}
+    '5': {name: support.function.q}
+  comment: q functions
+  match: (?=(\W|\b))((\.Q\.\w+)|(\.z\.\w+)|(\\\w+))(?=(\W|\b))
+  name: other.source.q
+- {comment: string, match: '".*?"', name: string.quoted.string.source.q}
+- {comment: string, match: '`[:/a-zA-Z0-9_.]+', name: string.interpolated.symbol.source.q}
+- captures:
+    '2': {name: variable.parameter.complex.source.q}
+    '3': {name: support.function.q}
+  comment: variable definition
+  match: (?=([^a-zA-Z0-9]|\b))(\.?[a-zA-Z]+[a-zA-Z0-9_\.]*\s*)(:)\s*
+  name: other.source.q
+- {comment: q adverbs/apply/amend/dict, match: '[!$@\\/_#?|'',`(\\:)]', name: support.function.q}
+- {comment: dot notation, match: '\.(?=\W)', name: support.function.q}
+- begin: (\{\s*\[)
+  contentName: meta.function.parameters.q
+  end: (?=\]\s*)
+  patterns:
+  - captures:
+      '1': {name: entity.other.inherited-class.q}
+      '2': {name: punctuation.separator.parameters.q}
+    match: \b([a-zA-Z_][a-zA-Z_0-9]*)\s*(?:(;)|(?=[\]\)]))
+- captures:
+    '2': {name: keyword.other.complex.source.q}
+  comment: q keyword
+  match: (?=(\W|\b))(prd|while|wavg|delete|min|like|exp|abs|insert|wsum|last|log|div|cos|sin|sqrt|max|in|exec|within|xexp|avg|second|hour|minute|update|sum|by|from|select|neg|not|null|string|reciprocal|floor|ceiling|signum|mod|xbar|xlog|and|or|each|scan|over|prior|mmu|lsq|inv|md5|ltime|gtime|count|first|var|dev|med|cov|cor|all|any|rand|sums|prds|mins|maxs|fills|deltas|ratios|avgs|differ|prev|next|rank|reverse|iasc|idesc|asc|desc|msum|mcount|mavg|mdev|xrank|mmin|mmax|xprev|rotate|distinct|group|where|flip|type|key|til|get|value|attr|cut|set|upsert|raze|union|inter|except|cross|sv|vs|sublist|enlist|read0|read1|hopen|hclose|hdel|hsym|hcount|peach|system|ltrim|rtrim|trim|lower|upper|ssr|view|tables|views|cols|xcols|keys|xkey|xcol|xasc|xdesc|fkeys|meta|lj|aj|aj0|ij|pj|asof|uj|ww|wj|wj1|fby|xgroup|ungroup|ej|save|load|rsave|rload|show|csv|parse|eval)(?=(\W|\b))
+  name: other.source.q
+- captures:
+    '2': {name: constant.numeric.complex.source.q}
+  comment: datetime
+  match: (?=(\W|\b))([0-9]{4}\.[0-9]{2}\.[0-9]{2}[TD]?[0-9]{2}:[0-9]{2}:[0-9]{2}(:[0-9]{2})?(\.[0-9]{3,6})?)(?=(\W|\b))
+  name: other.source.q
+- captures:
+    '2': {name: constant.numeric.complex.source.q}
+  comment: time
+  match: (?=(\W|\b))([0-9]{4}\.[0-9]{2}\.[0-9]{2}[TD]?)(?=(\W|\b))
+  name: other.source.q
+- captures:
+    '2': {name: constant.numeric.complex.source.q}
+  comment: date
+  match: (?=(\W|\b))([0-9]{2}:[0-9]{2}:[0-9]{2}(:[0-9]{2})?(\.[0-9]{3,6})?)(?=(\W|\b))
+  name: other.source.q
+- captures:
+    '2': {name: constant.numeric.complex.source.q}
+  comment: boolean,short,integer,long
+  match: (?=(\W|\b))([-]?[0-9]+[bhijef]{0,1}(\.[0-9]+[m]?)?|0x[a-f0-9]+)(?=(\W|\b))
+  name: other.source.q
+scopeName: source.q
+uuid: ef19f88f-c8f2-4877-a39b-68259fdd0ded

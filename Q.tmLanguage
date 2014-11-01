@@ -51,14 +51,26 @@
 			<string>comment.line.source.q</string>
 		</dict>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.complex.source.q</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>support.function.q</string>
+				</dict>
+			</dict>
 			<key>comment</key>
-			<string>string</string>
+			<string>q functions</string>
 			<key>match</key>
-			<string>^\\.*</string>
+			<string>(?=(\W|\b))((\.Q\.\w+)|(\.z\.\w+)|(\\\w+))(?=(\W|\b))</string>
 			<key>name</key>
-			<string>entity.name.function.q</string>
+			<string>other.source.q</string>
 		</dict>
-
 		<dict>
 			<key>comment</key>
 			<string>string</string>
@@ -75,7 +87,6 @@
 			<key>name</key>
 			<string>string.interpolated.symbol.source.q</string>
 		</dict>
-		
 		<dict>
 			<key>captures</key>
 			<dict>
@@ -101,7 +112,7 @@
 			<key>comment</key>
 			<string>q adverbs/apply/amend/dict</string>
 			<key>match</key>
-			<string>[!$@\/_#?|',`]</string>
+			<string>[!$@\\/_#?|',`(\\:)]</string>
 			<key>name</key>
 			<string>support.function.q</string>
 		</dict>
@@ -112,12 +123,10 @@
 			<string>\.(?=\W)</string>
 			<key>name</key>
 			<string>support.function.q</string>
-		</dict>		
-
+		</dict>
 		<dict>
 			<key>begin</key>
 			<string>(\{\s*\[)</string>
-			
 			<key>contentName</key>
 			<string>meta.function.parameters.q</string>
 			<key>end</key>
@@ -143,8 +152,6 @@
 				</dict>
 			</array>
 		</dict>
-
-
 		<dict>
 			<key>captures</key>
 			<dict>
