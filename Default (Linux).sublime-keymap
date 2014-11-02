@@ -8,6 +8,5 @@
 { "keys": ["f2"], "command": "q_print", "args": {"flip": false}},
 { "keys": ["shift+f2"], "command": "q_print", "args": {"flip": true}},
 
-
 { "keys": ["f3"], "command": "q_type", "args": {"flip": false}}
 ]

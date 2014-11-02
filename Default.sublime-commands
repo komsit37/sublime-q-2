@@ -6,5 +6,20 @@
     {
         "caption": "Q: Switch Connection",
         "command": "q_switch"
+    },
+    {
+        "caption": "Q: print",
+        "command": "q_print",
+        "args": {"flip": false}
+    }, 
+    {
+        "caption": "Q: print (flip)",
+        "command": "q_print",
+        "args": {"flip": true}
+    },
+    {
+        "caption": "Q: type",
+        "command": "q_type",
+        "args": {"flip": false}
     }
 ]
