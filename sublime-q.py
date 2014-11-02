@@ -49,13 +49,7 @@ class QSendCommand(sublime_plugin.TextCommand):
         
     def run(self, edit):
         # get s
-        s = ""
-        for region in self.view.sel():
-            if region.empty():
-                s += self.view.substr(self.view.line(region))
-                # self.advanceCursor(region)
-            else:
-                s += self.view.substr(region)
+        s = self.selectText()
 
         # only proceed if s is not empty
         if(s == "" or s == "\n"):
@@ -65,6 +59,16 @@ class QSendCommand(sublime_plugin.TextCommand):
         print s
 
         self.send(s)
+
+    def selectText(self):
+        s = ""
+        for region in self.view.sel():
+            if region.empty():
+                s += self.view.substr(self.view.line(region))
+                # self.advanceCursor(region)
+            else:
+                s += self.view.substr(region)
+        return s
 
     def advanceCursor(self, region):
         (row, col) = self.view.rowcol(region.begin())
@@ -134,6 +138,9 @@ class QPrintCommand(QSendCommand):
     """
     Search the selected text or the current word
     """
+    def preSend(self, s):
+        return s
+
     def run(self, edit, flip):
         print "q_print " + str(flip)
         # grab the word or the selection from the view
@@ -156,9 +163,18 @@ class QPrintCommand(QSendCommand):
 
             s = s.encode('ascii')  # qpy needs ascii
             if (flip): s = 'flip ' + s
+            s = self.preSend(s)
             print s
 
             self.send(s)
+
+class QTypeCommand(QPrintCommand):
+    """
+    figure type for q object. use different command for table, functions, and other objects
+    """
+    def preSend(self, s):
+        return "{$[.Q.qt x;meta x;100h=type x;value x;.Q.ty each x]} " + s
+
 
 class Q():
     @staticmethod
