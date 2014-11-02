@@ -22,11 +22,13 @@ class QSendCommand(sublime_plugin.TextCommand):
 
             statement = QSendCommand.transfrom(s)
             print statement
+            q('.tmp.start:.z.T')
             res = q(statement)
+            time = q('3_string `second$.z.T-.tmp.start')
 
             #get row count and set it to status text
             count = q('" x " sv string (count @[cols;.tmp.res;()]),count .tmp.res')
-            self.view.set_status('result', 'Result: ' + str(count))
+            self.view.set_status('result', 'Result: ' + str(count) + ', ' + str(time))
         except QException, msg:
             print msg
             res = "error: `" + str(msg)
