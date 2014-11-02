@@ -1,8 +1,12 @@
 # Use Sublime Text 2 as q IDE
 
-Cmd + Enter to send highlighted text or block text.<br>
-Cmd + Alt + c to connect to kdb.<br>
-Bring up console window to see output from kdb.
+Cmd + Enter or Cmd + e to send highlighted text or block text.<br>
+Cmd + Alt + c to edit kdb connection<br>
+Syntax higligh for output<br>
+shows rows, column, time at status bar <br>
+shortcut for print, type using f1, f2, f3<br>
+
+![Image of screenshot](https://github.com/komsit37/sublime-q/blob/master/screenshot.png)
 
 Use Exxeleron's python q api http://www.devnet.de/exxeleron/qpython <br>
 Only works with Sublime 2.<br>
