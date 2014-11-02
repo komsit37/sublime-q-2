@@ -43,8 +43,6 @@ class QSendCommand(sublime_plugin.TextCommand):
         if res is None:
             res = s
 
-
-
         #print(res)
         self.show_output_panel()
         self.append_data(str(res))
@@ -176,6 +174,14 @@ class QTypeCommand(QPrintCommand):
     """
     def preSend(self, s):
         return "{$[.Q.qt x;meta x;100h=type x;value x;.Q.ty each x]} " + s
+
+class QEnvCommand(QSendCommand):
+    def run(self, edit):
+        self.send('{x!value each \"\\\\\",\'x}\"dvabf\"')
+
+class QMemCommand(QSendCommand):
+    def run(self, edit):
+        self.send('.Q.w[]')
 
 
 class Q():

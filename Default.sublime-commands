@@ -21,5 +21,13 @@
         "caption": "Q: type",
         "command": "q_type",
         "args": {"flip": false}
+    }, 
+    {
+        "caption": "Q: Environments",
+        "command": "q_env"
+    },
+    {
+        "caption": "Q: Memory",
+        "command": "q_mem"
     }
 ]
