@@ -11,7 +11,7 @@ class QSendCommand(sublime_plugin.TextCommand):
         if (s[0] == "\\"):
             return "value\"\\" + s + "\""
         else:
-            return ".Q.s " + s
+            return ".Q.s .tmp.res:" + s
     
     def send(self, s):
         Q.init()
@@ -23,6 +23,10 @@ class QSendCommand(sublime_plugin.TextCommand):
             statement = QSendCommand.transfrom(s)
             print statement
             res = q(statement)
+
+            #get row count and set it to status text
+            count = q('" x " sv string (count @[cols;.tmp.res;()]),count .tmp.res')
+            self.view.set_status('result', 'Result: ' + str(count))
         except QException, msg:
             print msg
             res = "error: `" + str(msg)
@@ -36,6 +40,8 @@ class QSendCommand(sublime_plugin.TextCommand):
         #return itself if query is define variable or function
         if res is None:
             res = s
+
+
 
         #print(res)
         self.show_output_panel()
@@ -86,12 +92,13 @@ class QSendCommand(sublime_plugin.TextCommand):
 
     def show_output_panel(self):
         if not hasattr(self, 'output_view'):
-            self.output_view = self.window().get_output_panel("tests")
+            self.output_view = self.window().get_output_panel("q")
         self.output_view.set_syntax_file("Packages/Ocaml/OCamlyacc.tmLanguage")
-        self.clear_test_view()
-        self.window().run_command("show_panel", {"panel": "output.tests"})
+        self.output_view.settings().set("word_wrap", False)
+        self.clear_output()
+        self.window().run_command("show_panel", {"panel": "output.q"})
 
-    def clear_test_view(self):
+    def clear_output(self):
         self.output_view.set_read_only(False)
         edit = self.output_view.begin_edit()
         self.output_view.erase(edit, sublime.Region(0, self.output_view.size()))
@@ -122,6 +129,36 @@ class QSwitchCommand(sublime_plugin.WindowCommand):
         Q.saveLast(x)
         Q.init()
         Q.test()
+
+class QPrintCommand(QSendCommand):
+    """
+    Search the selected text or the current word
+    """
+    def run(self, edit, flip):
+        print "q_print " + str(flip)
+        # grab the word or the selection from the view
+        for region in self.view.sel():
+            location = False
+            if region.empty():
+                # if we have no selection grab the current word
+                location = self.view.word(region)
+            else:
+                # grab the selection
+                location = region
+
+            if location and not location.empty():
+                s = self.view.substr(location)
+                scope = self.view.scope_name(location.begin()).rpartition('.')[2].strip()
+
+            # only proceed if s is not empty
+            if(s == "" or s == "\n"):
+                return
+
+            s = s.encode('ascii')  # qpy needs ascii
+            if (flip): s = 'flip ' + s
+            print s
+
+            self.send(s)
 
 class Q():
     @staticmethod
