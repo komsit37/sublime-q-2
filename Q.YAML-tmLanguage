@@ -6,7 +6,7 @@ patterns:
     ', comment: comment block, end: '\\
 
     ', name: comment.block.source.q}
-- {comment: comment exit, match: //\w+.*, name: comment.line.source.q}
+- {comment: comment exit, match: //.*, name: comment.line.source.q}
 - {begin: '\\
 
     ', comment: string, end: '\\

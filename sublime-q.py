@@ -177,7 +177,7 @@ class QTypeCommand(QPrintCommand):
 
 class QEnvCommand(QSendCommand):
     def run(self, edit):
-        self.send('((enlist `ns)!k except `q`Q`h`j`o),{(`$/:x )! system each x } \"dvabf\"')
+        self.send('((enlist `ns)!(enlist(key `) except `q`Q`h`j`o)),{(`$/:x )! system each x } \"dvabf\"')
 
 class QMemCommand(QSendCommand):
     def run(self, edit):
