@@ -1,16 +1,21 @@
 # Use Sublime Text 2 as q IDE
 
 Cmd + Enter or Cmd + e to send highlighted text or block text.<br>
-Cmd + Alt + c to edit kdb connection<br>
-Syntax higligh for output<br>
+Cmd + Alt + s to quickly switch between connections (configured in Preferences->Package Settings->sublime-q)
+Cmd + Alt + c to edit selected kdb connection<br>
+Syntax higlighing (based on kimtang's https://github.com/kimtang/sublime-q)<br>
 shows rows, column, time at status bar <br>
-shortcut for print, type using f1, f2, f3<br>
-
+<ul>super convenient shortcut (I got this idea from Tinn-R)
+<li>f1 open help (this is actually on a different plugin, I will need to migrate it here)</li>
+<li>f2 print variable</li>
+<li>f3 show type</li>
+<li>f4 show environments (variable, function, etc)</li>
+<li>shift + f4 show memory usage (.Q.w)</li>
+</ul>
 ![Image of screenshot](https://github.com/komsit37/sublime-q/blob/master/screenshot.png)
 
 Use Exxeleron's python q api http://www.devnet.de/exxeleron/qpython <br>
 Only works with Sublime 2.<br>
-Inspired by https://github.com/wch/SendText
 
 ## Installation
 
