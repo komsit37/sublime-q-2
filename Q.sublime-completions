@@ -3,6 +3,32 @@
 
         "completions":
         [
-            {"trigger": "hquery", "contents": "h${1:} ({${2:tables `.}}; ${3:()})"}
+            {"trigger": "hquery", "contents": "h${1:} ({${2:tables `.}}; ${3:()})"},
+
+            {"trigger": "at Apply Dyadic (index at top level)", 	"contents": "@[${1:L}; ${2:I}; ${3:f}; ${4:y}]"},
+            {"trigger": "at Apply Monadic (index at top level)", 	"contents": "@[${1:L}; ${2:I}; ${3:f}]"},
+            {"trigger": "dot Apply Dyadic (index at depth)", 		"contents": ".[${1:L}; ${2:I}; ${3:f}; ${4:y}]"},
+            {"trigger": "dot Apply Monadic (index at depth)", 		"contents": ".[${1:L}; ${2:I}; ${3:f}]"},
+
+            {"trigger": "each both", 	 "contents": "'"},
+            {"trigger": "each left", 	 "contents": "\\:"},
+            {"trigger": "each right", 	 "contents": "/:"},
+            {"trigger": "each previous", "contents": "':"},
+            {"trigger": "over", 		 "contents": "/"},
+            {"trigger": "scan", 		 "contents": "\\"},
+
+            {"trigger": "Q.hdpf (save all tables and notify host)", 				"contents": "Q.hdpf[${1:5012}; `:${2:.}; ${3:.z.D}; ${4:`sym}]"},
+            {"trigger": "Q.dpft (Saves a table splayed to a specific partition)", 	"contents": "Q.dpft[`:${1:.}; ${2:.z.D}; ${3:`sym}; ${4:`table}]"},
+            {"trigger": "Q.en (enumerate sym)", 									"contents": "Q.en[${1:`:.}; ${2:table}]"},
+
+            {"trigger": "splayed set", 					"contents": "`:${1:dir}/${2:table}/ set ${2:table}"},
+            {"trigger": "splayed set (enumerated)", 	"contents": "`:${1:dir}/${2:table}/ set Q.en[`:${1:dir}] ${2:table}"},
+            {"trigger": "splayed append", 				"contents": "`:${1:dir}/${2:table}/ upsert ${2:table}"},
+            {"trigger": "splayed append (enumerated)", 	"contents": "`:${1:dir}/${2:table}/ upsert Q.en[`:${1:dir}] ${2:table}"},
+            {"trigger": "splayed sort and part", 		"contents": "`${1:column} xasc `:${2:dir}/${3:table}\n@[`:${2:dir}/${3:table};${1:column};`p#]\n\\l ${2:dir}/${3:table}"},
+            {"trigger": "splayed update", 				"contents": "`:${1:dir}/${2:table}/${3:column} set @[get `:{1:dir}/${2:table}/${3:column};${4:I};${5:f};${6:y}]\n\\l ${1:dir}/${2:table}"},
+            {"trigger": "splayed reorder columns", 		"contents": "`:${1:dir}/${2:table}/.d set ${3:columns}\n\\l ${2:dir}/${3:table}"},
+            {"trigger": "splayed add column", 			"contents": "@[`:${1:dir}/${2:table}; ${3:column}; :; ${4:values}]\n@[`:${1:dir}/${2:table}; `.d; ,; ${3:column}]\n\\l ${1:dir}/${2:table}"},
+            {"trigger": "splayed delete column", 		"contents": "`:${1:dir}/${2:table}/.d set ${3:remaining_columns}\nhdel `:${1:dir}/${2:table}/${4:removing_column}\n\\l ${1:dir}/${2:table}"}
         ]
 }

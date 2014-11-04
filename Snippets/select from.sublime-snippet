@@ -1,10 +1,10 @@
 
 <snippet>
 	<content><![CDATA[
-select ${1:} from ${2:table} where ${3:cond}
+select ${1:} from ${2:table}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>sfw</tabTrigger>
+	<tabTrigger>sf</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<!-- <scope>source.python</scope> -->
 </snippet>
