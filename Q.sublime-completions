@@ -22,9 +22,9 @@
             {"trigger": "Q.en (enumerate sym)", 									"contents": "Q.en[${1:`:.}; ${2:table}]"},
 
             {"trigger": "splayed set", 					"contents": "`:${1:dir}/${2:table}/ set ${2:table}"},
-            {"trigger": "splayed set (enumerated)", 	"contents": "`:${1:dir}/${2:table}/ set Q.en[`:${1:dir}] ${2:table}"},
+            {"trigger": "splayed set (enumerated)", 	"contents": "`:${1:dir}/${2:table}/ set .Q.en[`:${1:dir}] ${2:table}"},
             {"trigger": "splayed append", 				"contents": "`:${1:dir}/${2:table}/ upsert ${2:table}"},
-            {"trigger": "splayed append (enumerated)", 	"contents": "`:${1:dir}/${2:table}/ upsert Q.en[`:${1:dir}] ${2:table}"},
+            {"trigger": "splayed append (enumerated)", 	"contents": "`:${1:dir}/${2:table}/ upsert .Q.en[`:${1:dir}] ${2:table}"},
             {"trigger": "splayed sort and part", 		"contents": "`${1:column} xasc `:${2:dir}/${3:table}\n@[`:${2:dir}/${3:table};${1:column};`p#]\n\\l ${2:dir}/${3:table}"},
             {"trigger": "splayed update", 				"contents": "`:${1:dir}/${2:table}/${3:column} set @[get `:{1:dir}/${2:table}/${3:column};${4:I};${5:f};${6:y}]\n\\l ${1:dir}/${2:table}"},
             {"trigger": "splayed reorder columns", 		"contents": "`:${1:dir}/${2:table}/.d set ${3:columns}\n\\l ${2:dir}/${3:table}"},
