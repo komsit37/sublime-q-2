@@ -26,7 +26,7 @@ Clone this git repository into your `Sublime Text 2/Packages` or `Sublime Text 3
 * Linux: `~/.config/sublime-text-2`
 
 ```
-git clone https://github.com/komsit37/send-q.git
+git clone https://github.com/komsit37/sublime-q.git
 ```
 Then you will need to download and install for python2.6<br>
 * https://github.com/exxeleron/qPython - download .tar.gz and install using python2.6 setup.py install
@@ -39,3 +39,15 @@ python2.6 setup.py install
 ```
 
 Only tested on MAC OSX Mavericks
+
+to check your numpy version and installed directory, open console from sublime text cmd + ` (sublimetext may use different versions from your osx terminal)
+>>> import numpy
+>>> numpy.__version__
+'1.6.2'
+>>> numpy.__file__
+'/System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/numpy/__init__.pyc'
+
+to remove numpy 1.6.2
+open terminal
+cd /System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/
+sudo mv numpy numpy_old
