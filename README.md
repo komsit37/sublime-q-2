@@ -28,18 +28,17 @@ Clone this git repository into your `Sublime Text 2/Packages` or `Sublime Text 3
 ```
 git clone https://github.com/komsit37/sublime-q.git
 ```
-Then you will need to download and install for python2.6<br>
-* https://github.com/exxeleron/qPython - download .tar.gz and install using python2.6 setup.py install
-* numpy 1.8 (required by qPython)
+Then you will need to download and install numpy 1.8 for python2.6. OSX yosemite comes with default numpy 1.6 for python 2.6<br>
 
 *You need Python 2.6 since this is what sublime text uses
-Installing the correct version of numpy in osx mavericks is a pain since maverick came with numpy 1.6. I removed numpy 1.6 first (by going to your python2.6 package folder and remove the folder directly). I downloaded .tar.gz from http://sourceforge.net/projects/numpy/files/NumPy/1.8.1/ and then run (if i remembered correctly)
+Installing the correct version of numpy in osx is a pain since it came with numpy 1.6. I removed numpy 1.6 first (by going to your python2.6 package folder and remove the folder directly). I downloaded .tar.gz from http://sourceforge.net/projects/numpy/files/NumPy/1.8.1/ and then run (if i remembered correctly)
 ```
 python2.6 setup.py install
 ```
 
-Only tested on MAC OSX Mavericks
+Only tested on OSX
 
+## Troubleshoot
 to check your numpy version and installed directory, open console from sublime text cmd + ` (sublimetext may use different versions from your osx terminal)
 >>> import numpy<br>
 >>> numpy.__version__<br>
