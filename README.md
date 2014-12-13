@@ -41,13 +41,13 @@ python2.6 setup.py install
 Only tested on MAC OSX Mavericks
 
 to check your numpy version and installed directory, open console from sublime text cmd + ` (sublimetext may use different versions from your osx terminal)
->>> import numpy
->>> numpy.__version__
-'1.6.2'
->>> numpy.__file__
-'/System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/numpy/__init__.pyc'
+>>> import numpy<br>
+>>> numpy.__version__<br>
+'1.6.2'<br>
+>>> numpy.__file__<br>
+'/System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/numpy/__init__.pyc'<br>
 
-to remove numpy 1.6.2
-open terminal
-cd /System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/
-sudo mv numpy numpy_old
+to remove numpy 1.6.2<br>
+open terminal<br>
+cd /System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/<br>
+sudo mv numpy numpy_old<br>
