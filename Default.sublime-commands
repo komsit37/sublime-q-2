@@ -29,5 +29,9 @@
     {
         "caption": "Q: Memory",
         "command": "q_mem"
+    },
+    {
+        "caption": "Goto Documentation",
+        "command": "goto_documentation"
     }
 ]

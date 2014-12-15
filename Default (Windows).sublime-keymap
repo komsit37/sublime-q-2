@@ -1,14 +1,29 @@
 [
-{ "keys": ["ctrl+enter"], "command": "q_send" },
-{ "keys": ["ctrl+e"], "command": "q_send" },
+{ "keys": ["ctrl+enter"], "command": "q_send"
+	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
+{ "keys": ["ctrl+e"], "command": "q_send"
+	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
 
-{ "keys": ["ctrl+alt+c"], "command": "q_connect"},
-{ "keys": ["ctrl+alt+s"], "command": "q_switch"},
+//intentionally scope free
+{ "keys": ["ctrl+shift+q"], "command": "q_send" },
 
-{ "keys": ["f2"], "command": "q_print", "args": {"flip": false}},
-{ "keys": ["shift+f2"], "command": "q_print", "args": {"flip": true}},
+{ "keys": ["ctrl+alt+c"], "command": "q_connect"
+	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
+{ "keys": ["ctrl+alt+s"], "command": "q_switch"
+	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
 
-{ "keys": ["f3"], "command": "q_type", "args": {"flip": false}},
-{ "keys": ["f4"], "command": "q_env"},
-{ "keys": ["shift+f4"], "command": "q_mem"}
+{ "keys": ["f1"], "command": "goto_documentation"
+	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
+
+{ "keys": ["f2"], "command": "q_print", "args": {"flip": false}
+	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
+{ "keys": ["shift+f2"], "command": "q_print", "args": {"flip": true}
+	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
+
+{ "keys": ["f3"], "command": "q_type", "args": {"flip": false}
+	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
+{ "keys": ["f4"], "command": "q_env"
+	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
+{ "keys": ["shift+f4"], "command": "q_mem"
+	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] }
 ]
