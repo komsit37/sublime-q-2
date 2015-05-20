@@ -1,15 +1,17 @@
 [
-{ "keys": ["super+enter"], "command": "q_send"
+{ "keys": ["super+enter"], "command": "q_send", "args": {"save": true}
 	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
-{ "keys": ["super+e"], "command": "q_send"
+{ "keys": ["super+shift+enter"], "command": "q_send", "args": {"save": false}
+	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
+{ "keys": ["super+e"], "command": "q_send", "args": {"save": false}
 	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
 
 //intentionally scope free
-{ "keys": ["ctrl+q"], "command": "q_send" },
+{ "keys": ["super+alt+q"], "command": "q_send" , "args": {"save": false}},
 
-{ "keys": ["ctrl+alt+c"], "command": "q_connect"
+{ "keys": ["super+alt+p"], "command": "q_connect"
 	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
-{ "keys": ["ctrl+alt+s"], "command": "q_switch"
+{ "keys": ["super+alt+s"], "command": "q_switch"
 	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
 
 { "keys": ["f1"], "command": "goto_documentation"
@@ -22,8 +24,14 @@
 
 { "keys": ["f3"], "command": "q_type", "args": {"flip": false}
 	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
+
 { "keys": ["f4"], "command": "q_env"
 	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
 { "keys": ["shift+f4"], "command": "q_mem"
+	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
+
+{ "keys": ["f5"], "command": "q_hist"
+	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] },
+{ "keys": ["shift+f5"], "command": "q_hist_clear"
 	, "context":[{ "key": "selector", "operator": "equal", "operand": "source.q" }] }
 ]

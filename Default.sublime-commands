@@ -29,6 +29,14 @@
     {
         "caption": "Q: Memory",
         "command": "q_mem"
+    }, 
+    {
+        "caption": "Q: History",
+        "command": "q_hist"
+    }, 
+    {
+        "caption": "Q: Clear History",
+        "command": "q_hist_clear"
     },
     {
         "caption": "Goto Documentation",

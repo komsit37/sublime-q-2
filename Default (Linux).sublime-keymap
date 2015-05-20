@@ -2,7 +2,7 @@
 { "keys": ["ctrl+enter"], "command": "q_send" },
 { "keys": ["ctrl+e"], "command": "q_send" },
 
-{ "keys": ["ctrl+alt+c"], "command": "q_connect"},
+{ "keys": ["ctrl+alt+p"], "command": "q_connect"},
 { "keys": ["ctrl+alt+s"], "command": "q_switch"},
 
 { "keys": ["f2"], "command": "q_print", "args": {"flip": false}},

@@ -11,23 +11,32 @@ class QSendCommand(sublime_plugin.TextCommand):
         if (s[0] == "\\"):
             return "value\"\\" + s + "\""
         else:
-            return ".Q.s .tmp.res:" + s
+            return ".Q.s .sq.tmp:" + s
     
-    def send(self, s):
+    def send(self, s, save=False):
         Q.init()
         try:
             q = qconnection.QConnection(host = Q.host, port = Q.port, username = Q.user, password = Q.pwd)
             q.open()
             self.view.set_status('q', 'OK: ' + Q.con)
 
+            #init variables
+            q('if[not `sq in key `; .sq.tmp: `; .sq.h: ([] time:(); id: `int$(); cmd: (); execTime: ())]')
+
             statement = QSendCommand.transfrom(s)
             print statement
-            q('.tmp.start:.z.T')
+            q('.sq.start:.z.T')
             res = q(statement)
-            time = q('3_string `second$.z.T-.tmp.start')
+            time = q('3_string `second$.sq.execTime:.z.T-.sq.start')
+
+            if save:
+                q('.sq.last: .sq.tmp')
+                insert_hist = '`.sq.h insert (.z.T; 1+0|(last .sq.h)`id; `$"' + s.replace('\\', '\\\\').replace('"', '\\"') + '" ; .sq.execTime)'
+                print insert_hist
+                q(insert_hist)
 
             #get row count and set it to status text
-            count = q('" x " sv string (count @[cols;.tmp.res;()]),count .tmp.res')
+            count = q('" x " sv string (count @[cols;.sq.tmp;()]),count .sq.tmp')
             self.view.set_status('result', 'Result: ' + str(count) + ', ' + str(time))
         except QException, msg:
             print msg
@@ -47,7 +56,7 @@ class QSendCommand(sublime_plugin.TextCommand):
         self.show_output_panel()
         self.append_data(str(res))
         
-    def run(self, edit):
+    def run(self, edit, save=False):
         # get s
         s = self.selectText()
 
@@ -58,7 +67,7 @@ class QSendCommand(sublime_plugin.TextCommand):
         s = s.encode('ascii')  # qpy needs ascii
         print s
 
-        self.send(s)
+        self.send(s, save)
 
     def selectText(self):
         s = ""
@@ -183,6 +192,13 @@ class QMemCommand(QSendCommand):
     def run(self, edit):
         self.send('.Q.w[]')
 
+class QHistCommand(QSendCommand):
+    def run(self, edit):
+        self.send('.sq.h')
+
+class QHistClearCommand(QSendCommand):
+    def run(self, edit):
+        self.send('.sq.h: 0#.sq.h')
 
 class Q():
     @staticmethod
