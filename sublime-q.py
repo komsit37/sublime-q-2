@@ -11,7 +11,7 @@ class QSendCommand(sublime_plugin.TextCommand):
         if (s[0] == "\\"):
             return "value\"\\" + s + "\""
         else:
-            return ".Q.s .sq.tmp:" + s
+            return ".Q.s .st.tmp:" + s
     
     def send(self, s, save=False):
         Q.init()
@@ -21,22 +21,23 @@ class QSendCommand(sublime_plugin.TextCommand):
             self.view.set_status('q', 'OK: ' + Q.con)
 
             #init variables
-            q('if[not `sq in key `; .sq.tmp: `; .sq.h: ([] time:(); id: `int$(); cmd: (); execTime: ())]')
+            #q('if[not `st in key `; .st.tmp: `; .st.h: ([] time:(); id: `int$(); cmd: (); execTime: ())]')
+            q('if[not `st in key `; .st.tmp: `]')
 
             statement = QSendCommand.transfrom(s)
             print statement
-            q('.sq.start:.z.T')
+            q('.st.start:.z.T')
             res = q(statement)
-            time = q('3_string `second$.sq.execTime:.z.T-.sq.start')
+            time = q('3_string `second$.st.execTime:.z.T-.st.start')
 
-            if save:
-                q('.sq.last: .sq.tmp')
-                insert_hist = '`.sq.h insert (.z.T; 1+0|(last .sq.h)`id; `$"' + s.replace('\\', '\\\\').replace('"', '\\"') + '" ; .sq.execTime)'
-                print insert_hist
-                q(insert_hist)
+            #if save:
+                #q('.st.last: .st.tmp')
+                #insert_hist = '`.st.h insert (.z.T; 1+0|(last .st.h)`id; `$"' + s.replace('\\', '\\\\').replace('"', '\\"') + '" ; .st.execTime)'
+                #print insert_hist
+                #q(insert_hist)
 
             #get row count and set it to status text
-            count = q('" x " sv string (count @[cols;.sq.tmp;()]),count .sq.tmp')
+            count = q('" x " sv string (count @[cols;.st.tmp;()]),count .st.tmp')
             self.view.set_status('result', 'Result: ' + str(count) + ', ' + str(time))
         except QException, msg:
             print msg
