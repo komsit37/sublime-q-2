@@ -51,5 +51,5 @@ open terminal<br>
 cd /System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/<br>
 sudo mv numpy numpy_old<br>
 
-Update: Since OSX El Captain, you can't remove default python package with root. You will need to rebot into recovery mode (Command-R at startup logo), and run `csrutil disable` in terminal. see below link for more details 
+Update: Since OSX El Captain, you can't remove default python package with root. You will need to reboot into recovery mode (Command-R at startup logo), and run `csrutil disable` in terminal. see below link for more details 
 https://apple.stackexchange.com/questions/193368/what-is-the-rootless-feature-in-el-capitan-really
