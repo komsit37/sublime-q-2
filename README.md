@@ -14,7 +14,7 @@ shows rows, column, time at status bar <br>
 <li>f4 show environments (variable, function, etc)</li>
 <li>shift + f4 show memory usage (.Q.w)</li>
 </ul>
-![Image of screenshot](https://github.com/komsit37/sublime-q/blob/master/screenshot.png)
+![Image of screenshot](https://github.com/komsit37/sublime-q-2/blob/master/screenshot.png)
 
 Use Exxeleron's python q api http://www.devnet.de/exxeleron/qpython <br>
 Only works with Sublime 2.<br>
