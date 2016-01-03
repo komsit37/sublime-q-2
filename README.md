@@ -1,6 +1,8 @@
 # Use Sublime Text 2 as q IDE
 
-:exclamation:DEPRECATED: A new version which works with sublime text 3 is available [here](https://github.com/komsit37/sublime-q-3). I won't be updating this version anymore. Use this only if you specifically need sublime text 2, otherwise, use the new version.
+```
+DEPRECATED: A new version which works with sublime text 3 is available [here](https://github.com/komsit37/sublime-q). I won't be updating this version anymore. Use the new version unless you really need sublime text 2.
+```
 
 Cmd + Enter or Cmd + e to send highlighted text or block text.<br>
 Cmd + Alt + s to quickly switch between connections (configured in Preferences->Package Settings->sublime-q)
